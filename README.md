@@ -6,7 +6,7 @@ This is a single-page application (SPA) E-commerce website built using React and
 
 ## Demo
 
-You can access a live demo of this project on GitHub Pages: [Demo Link](https://shayanfaghihi.github.io/ecommerce-scalesOps/)
+You can access a live demo of this project on GitHub Pages: [Demo Link](https://ecommerce-scales-ops.vercel.app/)
 
 ## Features
 

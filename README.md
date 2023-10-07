@@ -1,8 +1,54 @@
-# React + Vite
+# E-commerce Website with React and Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a single-page application (SPA) E-commerce website built using React and Vite. It retrieves dummy store data from [fakestoreapi.com](https://fakestoreapi.com/) to showcase products. The website is responsive thanks to Bootstrap, and React Router Dom is used for navigation. Data is fetched using the Fetch API, and a loader is implemented for a smoother user experience.
 
-Currently, two official plugins are available:
+![Screenshot](./screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo
+
+You can access a live demo of this project on GitHub Pages: [Demo Link](https://shayanfaghihi.github.io/ecommerce-scalesOps/)
+
+## Features
+
+- Display of products from fakestoreapi.com
+- Responsive design using Bootstrap
+- Smooth loading experience with a loader
+- Navigation between pages using React Router Dom
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/ShayanFaghihi/ecommerce-scalesOps.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd ecommerce-scalesOps
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+## Usage
+
+1. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and visit [http://localhost:5173](http://localhost:5173) to view the website.
+
+## License
+
+This project is designed as a Task for ScalesOps.
+
+## Contact
+
+- Shayan (your email address)
+- GitHub: [Your GitHub Profile](https://github.com/ShayanFaghihi)

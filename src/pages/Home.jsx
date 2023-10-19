@@ -1,10 +1,11 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import React, { Suspense } from "react";
+import { Await, useLoaderData, defer } from "react-router-dom";
 import headerImage from "../assets/header.jpg";
 import ProductsList from "../components/ProductsList";
+import Loader from "../components/Loader";
 
 const HomePage = () => {
-  const products = useLoaderData();
+  const data = useLoaderData();
 
   const headerStyle = {
     maxHeight: "50vh",
@@ -22,9 +23,35 @@ const HomePage = () => {
         src={headerImage}
         alt="E-commerce desk"
       />
-      <ProductsList products={products} />
+      <Suspense fallback={<Loader />}>
+        <Await resolve={data.products}>
+          {(productsList) => <ProductsList products={productsList} />}
+        </Await>
+      </Suspense>
     </>
   );
 };
 
 export default HomePage;
+
+const getProducts = async (productId) => {
+  let url = "https://fakestoreapi.com/products/";
+
+  if (productId) {
+    url += productId;
+  }
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw json({ message: "Error in getting Products" }, { status: 404 });
+  } else {
+    const products = await response.json();
+    return products;
+  }
+};
+
+export const loader = ({ params }) => {
+  const productId = params.productId;
+
+  return defer({ products: getProducts(productId) });
+};

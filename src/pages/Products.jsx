@@ -1,21 +1,17 @@
-import React from "react";
-import { useLoaderData, json } from "react-router-dom";
+import React, { Suspense } from "react";
+import { Await, useRouteLoaderData } from "react-router-dom";
 import ProductsList from "../components/ProductsList";
+import Loader from "../components/Loader";
 
 const ProductsPage = () => {
-  const products = useLoaderData();
-  return <ProductsList products={products} />;
+  const data = useRouteLoaderData("products");
+  return (
+    <Suspense fallback={<Loader />}>
+      <Await resolve={data.products}>
+        {(productsList) => <ProductsList products={productsList} />}
+      </Await>
+    </Suspense>
+  );
 };
 
 export default ProductsPage;
-
-export const loader = async ({ request, params }) => {
-  const response = await fetch("https://fakestoreapi.com/products/");
-
-  if (!response.ok) {
-    throw json({ message: "Error in getting Products" }, { status: 404 });
-  } else {
-    const products = await response.json();
-    return products;
-  }
-};

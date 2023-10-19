@@ -1,13 +1,13 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootPage from "./pages/Root";
-import HomePage from "./pages/Home";
-import ProductsPage, { loader as productsLoader } from "./pages/Products";
+import HomePage, { loader as productsLoader } from "./pages/Home";
 import ErrorPage from "./pages/Error";
-import ProductDetailPage, {
-  loader as singleProductLoader,
-} from "./pages/ProductDetail";
-import ProductsRootPage from "./pages/ProductsRoot";
+import Loader from "./components/Loader";
+
+const ProductsRootPage = lazy(() => import("./pages/ProductsRoot"));
+const ProductsPage = lazy(() => import("./pages/Products"));
+const ProductDetailPage = lazy(() => import("./pages/ProductDetail"));
 
 const App = () => {
   const router = createBrowserRouter([
@@ -23,17 +23,29 @@ const App = () => {
         },
         {
           path: "products",
-          element: <ProductsRootPage />,
+          element: (
+            <Suspense fallback={<Loader />}>
+              <ProductsRootPage />
+            </Suspense>
+          ),
+          loader: productsLoader,
+          id: "products",
           children: [
             {
               index: true,
-              element: <ProductsPage />,
-              loader: productsLoader,
+              element: (
+                <Suspense fallback={<Loader />}>
+                  <ProductsPage />
+                </Suspense>
+              ),
             },
             {
               path: ":productId",
-              element: <ProductDetailPage />,
-              loader: singleProductLoader,
+              element: (
+                <Suspense fallback={<Loader />}>
+                  <ProductDetailPage />
+                </Suspense>
+              ),
             },
           ],
         },
